@@ -209,7 +209,7 @@
         const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
         // Check if passwords match
-        passwordsMatchProfessor = password === confirmPassword;
+        passwordsMatchProfessor = (password === confirmPassword) &&( password.length > 0);
 
         // Update UI for criteria
         updateCriteria("professorLengthCriteria", lengthCriteria);
