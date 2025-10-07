@@ -198,10 +198,8 @@
     passwordFieldStudent.addEventListener("input", validatePasswordStudent);
     confirmPasswordFieldStudent.addEventListener("input", validatePasswordStudent);
 
-    function validatePasswordProfessor() {
-        const password = passwordFieldProfessor.value;
-        const confirmPassword = confirmPasswordFieldProfessor.value;
 
+    function VP(password,confirmPassword,type){
         // Password criteria checks
         const lengthCriteria = password.length >= 8;
         const uppercaseCriteria = /[A-Z]/.test(password);
@@ -209,57 +207,38 @@
         const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
         // Check if passwords match
-        passwordsMatchProfessor = (password === confirmPassword) &&( password.length > 0);
+        passwordsMatch = (password === confirmPassword) &&( password.length > 0);
 
         // Update UI for criteria
-        updateCriteria("professorLengthCriteria", lengthCriteria);
-        updateCriteria("professorUppercaseCriteria", uppercaseCriteria);
-        updateCriteria("professorNumberCriteria", numberCriteria);
-        updateCriteria("professorSpecialCharCriteria", specialCharCriteria);
+        updateCriteria(type+"LengthCriteria", lengthCriteria);
+        updateCriteria(type+"UppercaseCriteria", uppercaseCriteria);
+        updateCriteria(type+"NumberCriteria", numberCriteria);
+        updateCriteria(type+"SpecialCharCriteria", specialCharCriteria);
 
         // Update UI for password match
-        const passwordMatchElement = document.getElementById("professorPasswordMatch");
-        if (passwordsMatchProfessor) {
+        const passwordMatchElement = document.getElementById(type+"PasswordMatch");
+        if (passwordsMatch) {
             passwordMatchElement.innerHTML = '<i class="bi bi-check-circle-fill text-success"></i> Passwords match';
         } else {
             passwordMatchElement.innerHTML = '<i class="bi bi-x-circle text-danger"></i> Passwords must match';
         }
 
         // Check if all conditions are met
-        passwordValidProfessor = lengthCriteria && uppercaseCriteria && numberCriteria && specialCharCriteria;
-        professorSubmitBtn.disabled = !(passwordValidProfessor && passwordsMatchProfessor);
+        passwordValid = lengthCriteria && uppercaseCriteria && numberCriteria && specialCharCriteria;
+        return !(passwordValid && passwordsMatch);
+    }
+
+    function validatePasswordProfessor() {
+        const password = passwordFieldProfessor.value;
+        const confirmPassword = confirmPasswordFieldProfessor.value;
+        professorSubmitBtn.disabled = VP(password,confirmPassword,"professor")
     }
 
     function validatePasswordStudent() {
         const password = passwordFieldStudent.value;
         const confirmPassword = confirmPasswordFieldStudent.value;
-
-        // Password criteria checks
-        const lengthCriteria = password.length >= 8;
-        const uppercaseCriteria = /[A-Z]/.test(password);
-        const numberCriteria = /[0-9]/.test(password);
-        const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-        // Check if passwords match
-        passwordsMatchStudent = password === confirmPassword;
-
-        // Update UI for criteria
-        updateCriteria("studentLengthCriteria", lengthCriteria);
-        updateCriteria("studentUppercaseCriteria", uppercaseCriteria);
-        updateCriteria("studentNumberCriteria", numberCriteria);
-        updateCriteria("studentSpecialCharCriteria", specialCharCriteria);
-
-        // Update UI for password match
-        const passwordMatchElement = document.getElementById("studentPasswordMatch");
-        if (passwordsMatchStudent) {
-            passwordMatchElement.innerHTML = '<i class="bi bi-check-circle-fill text-success"></i> Passwords match';
-        } else {
-            passwordMatchElement.innerHTML = '<i class="bi bi-x-circle text-danger"></i> Passwords must match';
-        }
-
-        // Check if all conditions are met
-        passwordValidStudent = lengthCriteria && uppercaseCriteria && numberCriteria && specialCharCriteria;
-        studentSubmitBtn.disabled = !(passwordValidStudent && passwordsMatchStudent);
+        studentSubmitBtn.disabled = VP(password,confirmPassword,"student")
+;
     }
 
     function updateCriteria(criteriaId, isMet) {
