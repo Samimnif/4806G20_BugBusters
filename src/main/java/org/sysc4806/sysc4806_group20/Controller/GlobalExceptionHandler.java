@@ -19,13 +19,13 @@ public class GlobalExceptionHandler {
     }
 
     // Handle all other exceptions (500)
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleGeneralException(Exception ex, Model model) {
-        model.addAttribute("errorTitle", "Internal Server Error");
-        model.addAttribute("errorMessage", "Something went wrong. Please try again later.");
-        // Optional: log exception details
-        System.err.println("Unhandled exception: " + ex.getMessage());
-        return "error/500";
-    }
+//    @ExceptionHandler(Exception.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public String handleGeneralException(Exception ex, Model model) {
+//        model.addAttribute("errorTitle", "Internal Server Error");
+//        model.addAttribute("errorMessage", "Something went wrong. Please try again later.");
+//        // Optional: log exception details
+//        System.err.println("Unhandled exception: " + ex.getMessage());
+//        return "error/500";
+//    }
 }
