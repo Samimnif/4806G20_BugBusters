@@ -227,18 +227,15 @@
         passwordValid = lengthCriteria && uppercaseCriteria && numberCriteria && specialCharCriteria;
         return !(passwordValid && passwordsMatch);
     }
-
     function validatePasswordProfessor() {
         const password = passwordFieldProfessor.value;
         const confirmPassword = confirmPasswordFieldProfessor.value;
-        professorSubmitBtn.disabled = VP(password,confirmPassword,"professor")
+        professorSubmitBtn.disabled = VP(password,confirmPassword,"professor");
     }
-
     function validatePasswordStudent() {
         const password = passwordFieldStudent.value;
         const confirmPassword = confirmPasswordFieldStudent.value;
-        studentSubmitBtn.disabled = VP(password,confirmPassword,"student")
-;
+        studentSubmitBtn.disabled = VP(password,confirmPassword,"student");
     }
 
     function updateCriteria(criteriaId, isMet) {
