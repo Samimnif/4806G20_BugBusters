@@ -11,7 +11,11 @@ import java.util.Optional;
 public class StudentService {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+    
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public Iterable<Student> findAll() {
         return studentRepository.findAll();

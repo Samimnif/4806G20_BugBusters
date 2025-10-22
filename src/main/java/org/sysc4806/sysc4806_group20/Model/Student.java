@@ -1,6 +1,11 @@
 package org.sysc4806.sysc4806_group20.Model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 
 import java.util.List;
 import java.util.Map;
