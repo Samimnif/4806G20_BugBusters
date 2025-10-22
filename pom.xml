@@ -35,7 +35,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
+	<dependency>
+ 	    <groupId>org.thymeleaf.extras</groupId>
+ 	    <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+	</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -65,7 +68,8 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>test</scope>
+	    <version>2.2.224</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -87,9 +91,10 @@
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                
+   <artifactId>spring-boot-maven-plugin</artifactId>
 		<configuration>
-			<mainClass>org.sysc4086_group20.BugBustersApplication</mainClass>
+			<mainClass>org.sysc4806.sysc4806_group20.BugBustersApplication</mainClass>
 		</configuration>
             </plugin>
 	    <plugin>

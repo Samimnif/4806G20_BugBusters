@@ -1,4 +1,8 @@
-<nav th:fragment="common-navbar" class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+     th:fragment="common-navbar"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><i class="bi bi-house" style="padding-right: 5px"></i>Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,39 +10,58 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/registration"><i class="bi bi-arrow-up-right-circle" style="padding-right: 5px"></i>Registration</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/listTopics"><i class="bi bi-card-list" style="padding-right: 5px"></i>List of Topics</a>
-                </li>
-                <li class="nav-item dropdown" id="professor">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Prof
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/profprofile">Profile</a></li>
-                        <!--<li><hr class="dropdown-divider"></li>-->
-                        <li><a class="dropdown-item" href="/newTopic">Add Topic</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown" id="student">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Student
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/studentprofile">Profile</a></li>
-                        <!--<li><hr class="dropdown-divider"></li>-->
-                        <li><a class="dropdown-item" href="/listStudentTopics">Join Topics</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item" id="login">
-                    <a class="nav-link" aria-current="page" href="/login"><i class="bi bi-box-arrow-in-right" style="padding-right: 5px"></i>Login</a>
-                </li>
-                <li class="nav-item" id="logout">
-                    <a class="nav-link" aria-current="page" href="/logout"><i class="bi bi-door-open" style="padding-right: 5px"></i>Logout</a>
-                </li>
-            </ul>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="/registration">
+      <i class="bi bi-arrow-up-right-circle" style="padding-right: 5px"></i>Registration
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="/listTopics">
+      <i class="bi bi-card-list" style="padding-right: 5px"></i>List of Topics
+    </a>
+  </li>
+
+  <!-- Show only to professors -->
+  <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('PROF','PROFESSOR')">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Prof
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="/profprofile">Profile</a></li>
+      <li><a class="dropdown-item" href="/newTopic">Add Topic</a></li>
+    </ul>
+  </li>
+
+  <!-- Show only to students -->
+  <li class="nav-item dropdown" sec:authorize="hasAuthority('STUDENT')">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Student
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="/studentprofile">Profile</a></li>
+      <li><a class="dropdown-item" href="/listStudentTopics">Join Topics</a></li>
+    </ul>
+  </li>
+
+  <!-- Show Login only when NOT authenticated -->
+  <li class="nav-item" sec:authorize="isAnonymous()">
+    <a class="nav-link" aria-current="page" href="/login">
+      <i class="bi bi-box-arrow-in-right" style="padding-right: 5px"></i>Login
+    </a>
+  </li>
+
+  <!-- Show Logout only when authenticated (POST form for CSRF) -->
+  <li class="nav-item" sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="post" class="d-inline">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <button type="submit" class="btn btn-link nav-link p-0">
+        <i class="bi bi-door-open" style="padding-right: 5px"></i>Logout
+     	 </button>
+   	 </form>
+ 	 </li>
+	</ul>
+
         </div>
     </div>
 </nav>
