@@ -16,7 +16,8 @@
 <div th:replace="common/navbar :: common-navbar"/>
 <div class="container mt-5">
     <h1 class="text-center mb-4">All Topics</h1>
-
+    <a href="/profprofile"><button type="button" class="btn btn-secondary"><i class="bi bi-arrow-left"> Back to Profile</i></button></a>
+    <br>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <!-- Loop through topics and display each in a card -->
         <div class="col" th:each="topic : ${topics}">
