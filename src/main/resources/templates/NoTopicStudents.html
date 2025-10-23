@@ -21,8 +21,8 @@
         <div th:each="s : ${studentsWithNoTopic}" class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center"><div>
-                        <h5 class="card-title mb-1">Student ID: <span th:text="${s.id}"></span></h5>
-                        <p class="card-text mb-0">Student Name: <span th:text="${s.firstName}"></span></p></div>
+                    <h5 class="card-title mb-1">Student ID: <span th:text="${s.id}"></span></h5>
+                    <p class="card-text mb-0">Student Name: <span th:text="${s.firstName}"></span></p></div>
                     <button class="btn btn-primary btn-sm send-message-btn" onclick="handleButtonClick(this)">Send Message</button>
                 </div>
             </div>
