@@ -17,6 +17,8 @@
 <div th:replace="common/navbar :: common-navbar" />
 <div class="container mt-5">
     <h2 class="text-center mb-4">Students With No Topics</h2>
+    <a href="/profprofile"><button type="button" class="btn btn-secondary"><i class="bi bi-arrow-left"> Back to Profile</i></button></a>
+    <br>
     <div class="row g-3">
         <div th:each="s : ${studentsWithNoTopic}" class="col-md-6">
             <div class="card shadow-sm">
