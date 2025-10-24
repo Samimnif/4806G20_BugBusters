@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<div th:replace="common/navbar :: common-navbar" />
+<div class="container mt-5">
+    <h2>Registration</h2>
+    <div id="Alerts"></div>
+    <!-- Toggle Buttons -->
+    <div class="d-flex gap-2 mb-4">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#professorForm"
+                aria-expanded="false" aria-controls="professorForm" onclick="hideOtherForms('studentForm')">
+            Professor
+        </button>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#studentForm"
+                aria-expanded="false" aria-controls="studentForm" onclick="hideOtherForms('professorForm')">
+            Student
+        </button>
+    </div>
+
+    <!-- Professor Form (Visible by Default) -->
+    <div class="collapse show" id="professorForm">
+        <div class="card card-body">
+            <h3>Professor Signup</h3>
+            <form id="professorFormSubmit">
+                <!-- Add your professor signup fields here -->
+                <div class="mb-3">
+                    <label for="professorFirstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="professorFirstName" placeholder="Enter your First Name"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="professorLastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="professorLastName" placeholder="Enter your Last Name"
+                           required>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="coordinator">
+                    <label class="form-check-label" for="coordinator">
+                        Coordinator Role
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <label for="professorUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="professorUsername" placeholder="Enter your Username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="professorPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="professorPassword" placeholder="Enter your Password" required>
+                    <ul id="professorPasswordCriteria" class="list-unstyled mt-2 text-muted">
+                        <li id="professorLengthCriteria"><i class="bi bi-x-circle"></i> At least 8 characters</li>
+                        <li id="professorUppercaseCriteria"><i class="bi bi-x-circle"></i> At least one uppercase letter</li>
+                        <li id="professorNumberCriteria"><i class="bi bi-x-circle"></i> At least one number</li>
+                        <li id="professorSpecialCharCriteria"><i class="bi bi-x-circle"></i> At least one special character</li>
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    <label for="professorPassword2" class="form-label">Reenter Password</label>
+                    <input type="password" class="form-control" id="professorPassword2" placeholder="Reenter your Password" required>
+                    <small id="professorPasswordMatch" class="text-muted"><i class="bi bi-x-circle"></i> Passwords must match</small>
+                </div>
+                <button type="submit" class="btn btn-primary" id="professorSubmitBtn" disabled>Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Form (Initially Hidden) -->
+    <div class="collapse" id="studentForm">
+        <div class="card card-body">
+            <h3>Student Signup</h3>
+            <form id="studentFormSubmit">
+                <!-- Add your student signup fields here -->
+                <div class="mb-3">
+                    <label for="studentFirstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="studentFirstName" placeholder="Enter your First Name"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="studentLastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="studentLastName" placeholder="Enter your Last Name"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="studentNumber" class="form-label">Student Number</label>
+                    <input type="text" class="form-control" id="studentNumber" placeholder="Enter your Student Number"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="studentUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="studentUsername" placeholder="Enter your Username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="studentPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="studentPassword" placeholder="Enter your Password" required>
+                    <ul id="studentPasswordCriteria" class="list-unstyled mt-2 text-muted">
+                        <li id="studentLengthCriteria"><i class="bi bi-x-circle"></i> At least 8 characters</li>
+                        <li id="studentUppercaseCriteria"><i class="bi bi-x-circle"></i> At least one uppercase letter</li>
+                        <li id="studentNumberCriteria"><i class="bi bi-x-circle"></i> At least one number</li>
+                        <li id="studentSpecialCharCriteria"><i class="bi bi-x-circle"></i> At least one special character</li>
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    <label for="studentPassword2" class="form-label">Reenter Password</label>
+                    <input type="password" class="form-control" id="studentPassword2" placeholder="Reenter your Password" required>
+                    <small id="studentPasswordMatch" class="text-muted"><i class="bi bi-x-circle"></i> Passwords must match</small>
+                </div>
+                <button type="submit" class="btn btn-secondary" id="studentSubmitBtn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to fetch the user role from the server
+        function fetchUserRole() {
+            return fetch("/api/navBar/getRole")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.text();
+                })
+                .catch((error) => {
+                    console.error("Error fetching user role:", error);
+                    return "Guest"; // Default to "Guest" on error
+                });
+        }
+
+        // Get menu elements
+        const professorMenu = document.getElementById("professor");
+        const studentMenu = document.getElementById("student");
+        const loginMenu = document.getElementById("login");
+        const logoutMenu = document.getElementById("logout");
+
+        // Hide all menus initially
+        professorMenu.style.display = "none";
+        studentMenu.style.display = "none";
+        loginMenu.style.display = "none";
+        logoutMenu.style.display = "none";
+
+        // Fetch user role and update UI accordingly
+        fetchUserRole().then((userRole) => {
+
+            // Show/hide menus based on user role
+            if (userRole === "Student") {
+                studentMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else if (userRole === "Professor") {
+                professorMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else if (userRole === "Admin") {
+                professorMenu.style.display = "block";
+                studentMenu.style.display = "block";
+                logoutMenu.style.display = "block";
+            } else {
+                loginMenu.style.display = "block"; // Guest user
+            }
+        });
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+    const passwordFieldProfessor = document.getElementById("professorPassword");
+    const confirmPasswordFieldProfessor = document.getElementById("professorPassword2");
+    const professorSubmitBtn = document.getElementById("professorSubmitBtn");
+    const passwordFieldStudent = document.getElementById("studentPassword");
+    const confirmPasswordFieldStudent = document.getElementById("studentPassword2");
+    const studentSubmitBtn = document.getElementById("studentSubmitBtn");
+
+    let passwordValidProfessor = false;
+    let passwordsMatchProfessor = false;
+    let passwordValidStudent = false;
+    let passwordsMatchStudent = false;
+
+    function hideOtherForms(formToCollapse) {
+        const form = document.getElementById(formToCollapse);
+        const bsCollapse = new bootstrap.Collapse(form, {
+            toggle: false
+        });
+        bsCollapse.hide();
+    }
+
+    passwordFieldProfessor.addEventListener("input", validatePasswordProfessor);
+    confirmPasswordFieldProfessor.addEventListener("input", validatePasswordProfessor);
+    passwordFieldStudent.addEventListener("input", validatePasswordStudent);
+    confirmPasswordFieldStudent.addEventListener("input", validatePasswordStudent);
+
+
+    function VP(password,confirmPassword,type){
+        // Password criteria checks
+        const lengthCriteria = password.length >= 8;
+        const uppercaseCriteria = /[A-Z]/.test(password);
+        const numberCriteria = /[0-9]/.test(password);
+        const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        // Check if passwords match
+        passwordsMatch = (password === confirmPassword) &&( password.length > 0);
+
+        // Update UI for criteria
+        updateCriteria(type+"LengthCriteria", lengthCriteria);
+        updateCriteria(type+"UppercaseCriteria", uppercaseCriteria);
+        updateCriteria(type+"NumberCriteria", numberCriteria);
+        updateCriteria(type+"SpecialCharCriteria", specialCharCriteria);
+
+        // Update UI for password match
+        const passwordMatchElement = document.getElementById(type+"PasswordMatch");
+        if (passwordsMatch) {
+            passwordMatchElement.innerHTML = '<i class="bi bi-check-circle-fill text-success"></i> Passwords match';
+        } else {
+            passwordMatchElement.innerHTML = '<i class="bi bi-x-circle text-danger"></i> Passwords must match';
+        }
+
+        // Check if all conditions are met
+        passwordValid = lengthCriteria && uppercaseCriteria && numberCriteria && specialCharCriteria;
+        return !(passwordValid && passwordsMatch);
+    }
+    function validatePasswordProfessor() {
+        const password = passwordFieldProfessor.value;
+        const confirmPassword = confirmPasswordFieldProfessor.value;
+        professorSubmitBtn.disabled = VP(password,confirmPassword,"professor");
+    }
+    function validatePasswordStudent() {
+        const password = passwordFieldStudent.value;
+        const confirmPassword = confirmPasswordFieldStudent.value;
+        studentSubmitBtn.disabled = VP(password,confirmPassword,"student");
+    }
+
+    function updateCriteria(criteriaId, isMet) {
+        const criteriaElement = document.getElementById(criteriaId);
+        if (isMet) {
+            criteriaElement.innerHTML = '<i class="bi bi-check-circle-fill text-success"></i> ' + criteriaElement.textContent.trim();
+        } else {
+            criteriaElement.innerHTML = '<i class="bi bi-x-circle text-danger"></i> ' + criteriaElement.textContent.trim();
+        }
+    }
+
+    // Handle Professor Form submission via AJAX
+    document.getElementById("professorFormSubmit").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const professorFirstName = document.getElementById("professorFirstName").value;
+        const professorLastName = document.getElementById("professorLastName").value;
+        const coordinator = document.getElementById("coordinator").checked;
+        const professorUsername = document.getElementById("professorUsername").value;
+        const professorPassword = document.getElementById("professorPassword").value;
+
+        // Hash the password (basic example using Base64 encoding for demonstration)
+        const hashedPassword = btoa(professorPassword);
+
+        const data = {
+            firstName: professorFirstName,
+            lastName: professorLastName,
+            coordinator: coordinator,
+            username: professorUsername,
+            password: hashedPassword
+        };
+
+        const url = "/api/userAccount/validate";
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.success) {
+                    // Proceed with creating the professor
+                    const createUrl = `/api/professors/newProfessor?firstName=${encodeURIComponent(professorFirstName)}&lastName=${encodeURIComponent(professorLastName)}&coordinator=${encodeURIComponent(coordinator)}&username=${encodeURIComponent(professorUsername)}&password=${encodeURIComponent(hashedPassword)}`;
+
+                    fetch(createUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then((createResponse) => createResponse.json())
+                        .then((createResult) => {
+                            if (createResult.success) {
+                                // Display success message
+                                showAlert(
+                                    "success",
+                                    `Professor account for ${professorFirstName} created successfully!`
+                                );
+                                document.querySelectorAll("form").forEach((form) => form.reset());
+                            } else {
+                                // Display specific creation error
+                                showAlert("danger", createResult.message || "Error creating account.");
+                            }
+                        });
+                } else {
+                    // Display validation errors from the controller
+                    const errorMessages = result.errors || ["Invalid input."];
+                    errorMessages.forEach((error) => showAlert("danger", result.message));
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                showAlert("danger", "An unexpected error occurred. Please try again.");
+            });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Handle Student Form submission via AJAX
+    document.getElementById("studentFormSubmit").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const studentFirstName = document.getElementById("studentFirstName").value;
+        const studentLastName = document.getElementById("studentLastName").value;
+        const studentNumber = document.getElementById("studentNumber").value;
+        const studentUsername = document.getElementById("studentUsername").value;
+        const studentPassword = document.getElementById("studentPassword").value;
+
+        // Hash the password (basic example using Crypto API)
+        const hashedPassword = btoa(studentPassword);
+
+        const data = {
+            firstName: studentFirstName,
+            lastName: studentLastName,
+            studentId: studentNumber,
+            username: studentUsername,
+            password: hashedPassword
+        };
+
+        const url = "/api/userAccount/validate";
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.success) {
+                    // Proceed with creating the student
+                    const createUrl = `/api/students/newStudent?firstName=${encodeURIComponent(studentFirstName)}&lastName=${encodeURIComponent(studentLastName)}&studentNumber=${encodeURIComponent(studentNumber)}&username=${encodeURIComponent(studentUsername)}&password=${encodeURIComponent(hashedPassword)}`;
+
+                    fetch(createUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then((createResponse) => createResponse.json())
+                        .then((createResult) => {
+                            if (createResult.success) {
+                                // Display success message
+                                showAlert(
+                                    "success",
+                                    `Student account for ${studentFirstName} created successfully!`
+                                );
+                                document.querySelectorAll("form").forEach((form) => form.reset());
+                            } else {
+                                // Display specific creation error
+                                showAlert("danger", createResult.message || "Error creating account.");
+                            }
+                        });
+                } else {
+                    // Display validation errors from the controller
+                    const errorMessages = result.errors || ["Invalid input."];
+                    errorMessages.forEach((error) => showAlert("danger", error));
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                showAlert("danger", "An unexpected error occurred. Please try again.");
+            });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Function to display alert messages
+    function showAlert(type, message) {
+        const alertId = `alert-${Date.now()}`;
+        $("#Alerts").append(`
+        <div class="alert alert-${type} d-flex align-items-center" id="${alertId}" role="alert">
+            <i class="bi ${type === "success" ? "bi-check-circle-fill" : "bi-x-octagon"}" style="padding-right: 5px"></i>
+            <div>${message}</div>
+        </div>
+    `);
+        setTimeout(() => {
+            $(`#${alertId}`).remove();
+        }, 15000);
+    }
+</script>
+</body>
+</html>
