@@ -1,41 +1,32 @@
-HELP.md
-/data/
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# JDK files (too large for GitHub)
+jdk-*/
+openjdk-*.tar.gz
+*.jdk/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# JFR files (profiling data)
+*.jfr
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# IDE files
+.idea/
+.vscode/
 *.iml
 *.ipr
+*.iws
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-4806G20_BugBusters/
-target/
-*.jfr
-*.log
+# OS files
 .DS_Store
-.idea/
+Thumbs.db
 
+# Build files
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
