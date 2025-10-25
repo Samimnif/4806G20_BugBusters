@@ -85,8 +85,11 @@ public class UserAccountRestController {
 
 
     @PostMapping("/logout")
-    public String logout(HttpSession session) {
+    public ResponseEntity<Map<String, Object>> logout(HttpSession session) {
         session.invalidate(); // Invalidate the session
-        return "Logged out successfully!";
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "Logged out successfully!");
+        return ResponseEntity.ok(response);
     }
 }
